@@ -1,0 +1,15 @@
+{
+    "name": "dbseller/projeto-inicial",
+    "description": "Site cafeteria",
+    "autoload": {
+        "psr-4": {
+            "Dbseller\\ProjetoInicial\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pedro Schinke"
+        }
+    ],
+    "require": {}
+}
