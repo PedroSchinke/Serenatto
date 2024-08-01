@@ -14,6 +14,11 @@ if (isset($_POST['cadastro'])) {
         $_POST['descricao'],
         $_POST['preco']
     );
+
+    if (isset($_FILES['imagem'])) {
+        $product->setImage(uniqid() . $_FILES['imagem']['name']);
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $product->getImageDirectory());
+    }
     
     $pdo = DBConnection::createConnection();
     $productRepository = new ProductRepository($pdo);
@@ -50,7 +55,7 @@ if (isset($_POST['cadastro'])) {
         <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <section class="container-form">
-        <form action="#" method="post">
+        <form action="#" method="post" enctype="multipart/form-data">
 
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>

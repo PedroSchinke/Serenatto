@@ -18,6 +18,11 @@ if (isset($_POST['editar'])) {
     $_POST['preco'],
     $_POST['imagem']
   );
+
+  if (isset($_FILES['imagem'])) {
+    $product->setImage(uniqid() . $_FILES['imagem']['name']);
+    move_uploaded_file($_FILES['imagem']['tmp_name'], $product->getImageDirectory());
+  }
   
   $productRepository->editProduct($updatedProduct);
   header('Location: admin.php');
@@ -53,7 +58,7 @@ if (isset($_POST['editar'])) {
     <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
   </section>
   <section class="container-form">
-    <form action="#" method="post">
+    <form action="#" method="post" enctype="multipart/form-data">
 
       <label for="nome">Nome</label>
       <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" value="<?= $product->getName() ?>" required>
