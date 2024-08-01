@@ -5,7 +5,7 @@ namespace Dbseller\ProjetoInicial\Infra\Persistence;
 use PDO;
 use PDOException;
 
-class ConexaoBd
+class DBConnection
 {
     public static function createConnection(): PDO
     {

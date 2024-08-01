@@ -1,12 +1,12 @@
 <?php
 
-    use Dbseller\ProjetoInicial\Infra\Persistence\ConexaoBd;
+    use Dbseller\ProjetoInicial\Infra\Persistence\DBConnection;
     use Dbseller\ProjetoInicial\Model\Product;
     use Dbseller\ProjetoInicial\Repository\ProductRepository;
 
     require_once 'vendor/autoload.php';
 
-    $pdo = ConexaoBd::createConnection();
+    $pdo = DBConnection::createConnection();
 
     $produtosRepositorio = new ProductRepository($pdo);
     $dadosCafe = $produtosRepositorio->coffeeOptions();
