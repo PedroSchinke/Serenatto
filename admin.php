@@ -1,11 +1,11 @@
 <?php
 
-use Dbseller\ProjetoInicial\Infra\Persistence\ConexaoBd;
+use Dbseller\ProjetoInicial\Infra\Persistence\DBConnection;
 use Dbseller\ProjetoInicial\Repository\ProductRepository;
 
 require 'vendor/autoload.php';
 
-$pdo = ConexaoBd::createConnection();
+$pdo = DBConnection::createConnection();
 $productRepository = new ProductRepository($pdo);
 $products = $productRepository->getAllProducts();
 
@@ -55,17 +55,18 @@ $products = $productRepository->getAllProducts();
             <td><?= $product->getType() ?></td>
             <td><?= $product->getDescription() ?></td>
             <td><?= $product->getFormattedPrice() ?></td>
-            <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
+            <td><a class="botao-editar" href="editar-produto.php?id=<?= $product->getId()?>">Editar</a></td>
             <td>
-              <form>
-                <input type="button" class="botao-excluir" value="Excluir">
+              <form action="delete-product.php" method="post">
+                <input type="hidden" name="id" value="<?= $product->getId() ?>">
+                <input type="submit" class="botao-excluir" value="Excluir">
               </form>
             </td>
           </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
-  <a class="botao-cadastrar" href="cadastrar-produto.html">Cadastrar produto</a>
+  <a class="botao-cadastrar" href="cadastrar-produto.php">Cadastrar produto</a>
   <form action="#" method="post">
     <input type="submit" class="botao-cadastrar" value="Baixar Relatório"/>
   </form>

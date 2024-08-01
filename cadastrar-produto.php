@@ -1,3 +1,29 @@
+<?php
+
+use Dbseller\ProjetoInicial\Infra\Persistence\DBConnection;
+use Dbseller\ProjetoInicial\Model\Product;
+use Dbseller\ProjetoInicial\Repository\ProductRepository;
+
+require 'vendor/autoload.php';
+
+if (isset($_POST['cadastro'])) {
+    $product = new Product(
+        null,
+        $_POST['tipo'],
+        $_POST['nome'],
+        $_POST['descricao'],
+        $_POST['preco']
+    );
+    
+    $pdo = DBConnection::createConnection();
+    $productRepository = new ProductRepository($pdo);
+    $productRepository->save($product);
+    
+    header("Location: admin.php");
+}
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -24,7 +50,7 @@
         <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <section class="container-form">
-        <form action="#">
+        <form action="#" method="post">
 
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
