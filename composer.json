@@ -11,5 +11,7 @@
             "name": "Pedro Schinke"
         }
     ],
-    "require": {}
+    "require": {
+        "dompdf/dompdf": "^3.0"
+    }
 }
